@@ -1,0 +1,7 @@
+[tool.ruff]
+line-length = 100
+extend-exclude = ["exploration"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]  # erreurs, pyflakes, warnings, imports triés
+ignore = ["DTZ001"]  # dates not timezone-aware: fine here, we work at day granularity
