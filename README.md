@@ -3,6 +3,7 @@
 An interactive dashboard that fetches real station-measured weather, air quality, and pollen data on a given day and displays them as toggleable layers on a single map.
 
 ![alt text](outputs/images/15_04_26.png)
+Example: 15/04/2026 - only meteostat data
 ## Data sources
 
 All three sources are real instrument measurements from physical stations.
@@ -53,14 +54,13 @@ meteo/
 ├── data/
 │   ├── weather.py      # Meteostat: fetch_weather_for_day(day, country_iso="CH")
 │   ├── pollution.py    # OpenAQ: fetch_air_quality_for_day(day, country_iso="CH")
-│   └── pollen.py        # MeteoSwiss: fetch_pollen_for_day(day, station_codes=None)
+│   └── pollen.py       # MeteoSwiss: fetch_pollen_for_day(day, station_codes=None)
 ├── viz/
-│   └── dashboard.py     # build_dashboard(...) -> Folium multi-layer map
-├── exploration/          # Early exploratory scripts (temperature vs. elevation regression)
+│   └── dashboard.py    # build_dashboard(...) -> Folium multi-layer map
 ├── main.py
 ├── requirements.txt
 └── outputs/
-    └── images/            # Examples added to readme.md
+    └── images/         # Examples added to readme.md
     └── dashboard.html
     
 ```
@@ -69,12 +69,12 @@ Each `fetch_*` function in `data/` returns a `(DataFrame, units)` tuple: one row
 
 ## Known limitations & possible improvements
 
-- **No caching**: every run re-queries all three APIs. A simple disk cache (e.g. one file per `source_country_day`) would speed up repeated runs and reduce API load — this matters in particular for OpenAQ, whose free tier can suspend accounts that query too aggressively.
+- **No caching**: every run re-queries all three APIs. A simple disk cache would speed up repeated runs and reduce API load — this matters in particular for OpenAQ, whose free tier can suspend accounts that query too aggressively.
 - **No pagination handling**: `get_all_stations` (Meteostat, OpenAQ) assumes a country has fewer stations than the API's per-request limit, which holds for Switzerland but not necessarily for larger countries.
 - **OpenAQ daily values**: `fetch_air_quality_for_day` does not currently filter out stations with no recent activity. A sensor that exists but hasn't reported in years would simply return no data for the requested day and be silently skipped.
 - **Pollen covers Switzerland only**: MeteoSwiss's automatic pollen network has no equivalent, freely accessible station-based source in other countries at the time of writing.
-- **Single-day snapshots**: the project currently fetches one day at a time. A natural extension would be to fetch a date range and analyze trends over time, as explored for temperature vs. elevation in `exploration/`.
+- **Single-day snapshots**: the project currently fetches one day at a time. A natural extension would be to fetch a date range.
 
 ## Exploratory analysis
 
-In comming
+Incoming
