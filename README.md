@@ -1,6 +1,6 @@
 # Weather, Air Quality & Pollen Dashboard
 
-An interactive dashboard that fetches real station-measured weather, air quality, and pollen data for Switzerland on a given day, and displays them as toggleable layers on a single map.
+An interactive dashboard that fetches real station-measured weather, air quality, and pollen data on a given day and displays them as toggleable layers on a single map.
 
 ![alt text](outputs/images/15_04_26.png)
 ## Data sources
